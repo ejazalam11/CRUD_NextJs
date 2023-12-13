@@ -19,7 +19,7 @@ const Create = () => {
           e_skill: skill,
           e_criteria: criteria,
         });
-        console.log('Auto-saved!');
+        alert('Auto-saved!');
       } catch (error) {
         console.error('Auto-save failed:', error);
       }
@@ -27,7 +27,7 @@ const Create = () => {
 
     const timeoutId = setTimeout(() => {
       saveData();
-    }, 2000);
+    }, 4000);
 
     return () => clearTimeout(timeoutId);
   }, [job, skill, criteria]);
@@ -39,16 +39,17 @@ const Create = () => {
   return (
     <>
       {[...Array(formCount)].map((_, index) => (
-        <div key={index} className=" border-gray-400 border-1 p-5 w-[35%] mt-10 ml-[30%] rounded-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
-          <div className="text-center">
-            <div className=" font-bold p-3 mt-10 text-black rounded-lg w-56 text-center text-3xl ml-[27%]">
+        <div key={index} className=" border-gray-400 border-1 p-5 w-[35%] mt-10 ml-[30%] rounded-2xl shadow-[0_35px_60px_-15px_rgba(1,1,1,1.3)]">
+          <div className=" font-bold p-3  text-black rounded-lg w-56 text-center text-3xl ml-[27%]">
               <h1>Create Data</h1>
             </div>
+          <div className="text-center   " >
+            
             <div className="form-group m-2 p-2">
               <input
                 type="text"
                 placeholder="Job Title"
-                className="from-control p-3 border-gray-200 border-2 inline-block rounded-3xl bg-gray-100"
+                className="from-control p-3 border-gray-200 border-2 inline-block rounded-3xl mt-2 bg-gray-100"
                 onChange={(e) => setJob(e.target.value)}
               />
             </div>

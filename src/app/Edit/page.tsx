@@ -9,14 +9,15 @@ import { link } from "fs";
 
 const Edit = () => {
   const [id, setid] = useState<string | null>(null);
-  const [job, setjob] = useState< string>("");
+  const [job, setjob] = useState< string | number>("");
   const [skill, setskill] = useState<number | string>("");
   const [criteria, setcriteria] = useState("");
   // const router = useRouter();
 
   useEffect(() => {
     setid(localStorage.getItem("id"));
-    setjob(localStorage.getItem("job") || ""); 
+    // setjob(localStorage.getItem("job") || ""); 
+    setjob(localStorage.getItem("job") || "");
     setskill(localStorage.getItem("skill") || "");
     setcriteria(localStorage.getItem("criteria") || "");
   }, []);
@@ -26,17 +27,18 @@ const Edit = () => {
     e.preventDefault();
     axios
       .put(`https://6537c4e9a543859d1bb0cc81.mockapi.io/crud/${id}`, {
+        
         e_job: job,
         e_skill: skill,
         e_criteria: criteria,
       })
-      .then(() => {
-        // router.push("/Read");
-        <link href="/Read">
-        update
-        </link>  
+      // .then(() => {
+      //   // router.push("/Read");
+      //   <link href="/Read">
+      //   update
+      //   </link>  
         
-      });
+      // });
   };
 
   return (
