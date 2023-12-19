@@ -1,6 +1,4 @@
-
 "use client"
-// components/Create.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
@@ -10,6 +8,7 @@ const Create = () => {
   const [skill, setSkill] = useState('');
   const [criteria, setCriteria] = useState('');
   const [formCount, setFormCount] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(true); // Initialize modal as open
 
   useEffect(() => {
     const saveData = async () => {
@@ -36,15 +35,19 @@ const Create = () => {
     setFormCount((prevCount) => prevCount + 1);
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
-      {[...Array(formCount)].map((_, index) => (
-        <div key={index} className=" border-gray-400 border-1 p-5 w-[35%] mt-10 ml-[30%] rounded-2xl shadow-[0_35px_60px_-15px_rgba(1,1,1,1.3)]">
-          <div className=" font-bold p-3  text-black rounded-lg w-56 text-center text-3xl ml-[27%]">
-              <h1>Create Data</h1>
-            </div>
-          <div className="text-center   " >
-            
+
+      {isModalOpen && ( // Only render the modal when isModalOpen is true
+          <div className="fixed  top-40 left-40 w-[44%] h-[70%] rounded-2xl ml-[20%]  bg-gray-800 bg-opacity-20 backdrop-blur-2xl">
+        <div key={0} className=" border-gray-400 border-1 p-5 w-[55%] mt-10 ml-[25%] rounded-2xl ">
+          <div className=" font-bold p-3  text-white rounded-lg w-56 text-center text-3xl ml-[27%]">
+            <h1>Create Data</h1>
+          </div>
+          <div className="text-center   ">
             <div className="form-group m-2 p-2">
               <input
                 type="text"
@@ -71,16 +74,17 @@ const Create = () => {
             </div>
             <br />
             <div className="">
-              <Link href="/Read">
-                <button className="p-4 w-40 bg-slate-950 text-center text-white rounded-3xl">Close</button>
-              </Link>
+              <button className="p-4 w-40 bg-slate-950 text-center text-white rounded-3xl" onClick={handleCloseModal}>
+                Close
+              </button>
               <button className="p-4 w-40 bg-slate-950 text-center text-white rounded-3xl ml-5" onClick={handleAddForm}>
                 Add New Form
               </button>
             </div>
           </div>
-        </div>
-      ))}
+          </div>
+      </div>
+      )}
     </>
   );
 };
