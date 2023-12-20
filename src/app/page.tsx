@@ -1,10 +1,10 @@
-// components/Read.tsx
-"use client";
+"use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from './Button/page';
 import EditModel from './EditModel/page';
 import Createe from './Createe/page';
+import Aside from './Aside/page';
 
 interface IData {
   id: number;
@@ -17,7 +17,6 @@ const Read: React.FC = () => {
   const [api, setApi] = useState<IData[]>([]);
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [selectedItemId, setSelectedItemId] = useState<number | null>(null);
   const [editData, setEditData] = useState<IData | null>(null);
   const [deleteButtonClick, setDeleteButtonClick] = useState(false);
 
@@ -27,28 +26,29 @@ const Read: React.FC = () => {
     });
   }
 
-  function handleDelete(id: number) {
-    setDeleteButtonClick(true);
-    axios.delete(`https://6537c4e9a543859d1bb0cc81.mockapi.io/crud/${id}`).then(() => {
+  const handleDelete = async (id: number, e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  
+    try {
+      await axios.delete(`https://6537c4e9a543859d1bb0cc81.mockapi.io/crud/${id}`);
       getData();
-      setDeleteButtonClick(false);
-    });
-    // Open EditModel for the given id
-    openEditModal(id);
-  }
+      if (!isEditModalOpen) {
+        openEditModal(id);
+      }
+    } catch (error) {
+      console.error('Error deleting data:', error);
+    }
+  };
 
   const openEditModal = async (id: number) => {
-    if (!deleteButtonClick) {
-      try {
-        const response = await axios.get(`https://6537c4e9a543859d1bb0cc81.mockapi.io/crud/${id}`);
-        const data = response.data;
+    try {
+      const response = await axios.get(`https://6537c4e9a543859d1bb0cc81.mockapi.io/crud/${id}`);
+      const data = response.data;
 
-        setSelectedItemId(id);
-        setEditModalOpen(true);
-        setEditData(data);
-      } catch (error) {
-        console.error('Error fetching data for EditModel:', error);
-      }
+      setEditModalOpen(true);
+      setEditData(data);
+    } catch (error) {
+      console.error('Error fetching data for EditModel:', error);
     }
   };
 
@@ -63,24 +63,22 @@ const Read: React.FC = () => {
 
   const handleCreateModalClose = async () => {
     setCreateModalOpen(false);
-    // Fetch the latest data from the API and update the state
     const response = await axios.get('https://6537c4e9a543859d1bb0cc81.mockapi.io/crud');
     setApi(response.data);
   };
 
   return (
     <div>
-      <div className="row">
-        <div className="col-md-12">
+      <Aside/>
+    
           <div className="table-container">
-          <table className="w-full bg-black text-white">
+            <table className="w-[80%] ml-[20%] text-white">
               <thead>
                 <tr>
-                  <th className="p-3 text-2xl">ID</th>
-                  <th className="p-3 text-2xl">Job Title</th>
-                  <th className="p-3 text-2xl">Skill</th>
-                  <th className="p-3 text-2xl">Criteria</th>
-                  <th className="p-3 text-2xl">DELETE</th>
+                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">ID</th>
+                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">Job Title</th>
+                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">Skill</th>
+                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">Criteria</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,16 +87,17 @@ const Read: React.FC = () => {
                     key={item.id}
                     onClick={() => openEditModal(item.id)}
                     style={{ cursor: 'pointer' }}
+                    className='hover:bg-cyan-100'
                   >
-                    <td className="border-1 border-gray-400 border text-center">{item.id}</td>
-                    <td className="border-1 border border-gray-400 text-center">{item.e_job}</td>
-                    <td className="border-1 border border-gray-400 text-center">{item.e_skill}</td>
-                    <td className="border-1 border border-gray-400 text-center">{item.e_criteria}</td>
+                    <td className="border-1 border text-center text-black">{item.id}</td>
+                    <td className="border-1 border text-center text-black">{item.e_job}</td>
+                    <td className="border-1 border text-center text-black">{item.e_skill}</td>
+                    <td className="border-1 border text-center text-black">{item.e_criteria}</td>
                     <td>
                       <div className="text-center">
                         <Button
-                          className="btn btn-danger p-4 bg-red-600 text-white rounded-3xl"
-                          onClick={() => handleDelete(item.id)}
+                          className="p-4 bg-blue-600 text-white rounded-3xl"
+                          onClick={(e) => handleDelete(item.id, e)}
                           label="DELETE"
                         />
                       </div>
@@ -107,13 +106,13 @@ const Read: React.FC = () => {
                 ))}
               </tbody>
             </table>
-          </div>
-
-          <Button
+            <Button
             className="btn btn-primary bg-blue-500 text-white p-4 ml-[40%] mt-5 m-2 rounded-xl"
             onClick={() => setCreateModalOpen(true)}
             label="Create New Data"
           />
+          </div>
+ 
           {isCreateModalOpen && <Createe onClose={handleCreateModalClose} />}
           {isEditModalOpen && (
             <EditModel
@@ -123,11 +122,12 @@ const Read: React.FC = () => {
                 setEditModalOpen(false);
                 setEditData(null);
               }}
+              isOpen={isEditModalOpen}
             />
           )}
         </div>
-      </div>
-    </div>
+  //     </div>
+  //   </div>
   );
 };
 

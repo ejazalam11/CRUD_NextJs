@@ -1,5 +1,5 @@
 // EditModel.tsx
-"use client"
+"use client";
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -29,8 +29,7 @@ const EditModel: React.FC<EditModelProps> = ({ data, onUpdate, onClose }) => {
     }
   }, [data]);
 
-  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleUpdate = async () => {
     if (data) {
       try {
         const updatedData = {
@@ -47,6 +46,16 @@ const EditModel: React.FC<EditModelProps> = ({ data, onUpdate, onClose }) => {
     }
   };
 
+  useEffect(() => {
+    // Set up auto-update every 5 seconds (adjust the interval as needed)
+    const intervalId = setInterval(() => {
+      handleUpdate();
+    }, 500);
+
+    // Clear the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, [job, skill, criteria]);
+
   return (
     <>
       <div className="row text-center fixed top-40 left-40 w-[40%] h-[70%] rounded-2xl ml-[20%] bg-gray-800 bg-opacity-20 backdrop-blur-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
@@ -55,7 +64,7 @@ const EditModel: React.FC<EditModelProps> = ({ data, onUpdate, onClose }) => {
           <div className="font-bold p-3 mt-10 text-white rounded-lg w-56 text-center text-3xl ml-[1%] mb-8">
             <h1>Update Data</h1>
           </div>
-          <form onSubmit={handleUpdate}>
+          <form>
             <div className="form-group m-2">
               <input
                 type="text"
@@ -85,12 +94,7 @@ const EditModel: React.FC<EditModelProps> = ({ data, onUpdate, onClose }) => {
             </div>
 
             <br />
-            <input
-              type="submit"
-              value="Update"
-              className="btn btn-primary p-3 cursor-pointer bg-green-500 text-white rounded-3xl w-20"
-            />
-            <button className="bg-black text-white p-3 ml-7 rounded-3xl" onClick={onClose}>
+            <button className="bg-gray-500 text-white p-3 rounded-3xl" onClick={onClose}>
               Close
             </button>
           </form>

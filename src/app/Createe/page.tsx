@@ -3,6 +3,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// import Multiple from '../Multiple/page';
 
 interface CreateModalProps {
   onClose: () => void;
@@ -36,9 +37,9 @@ const Createe: React.FC<CreateModalProps> = ({ onClose }) => {
     return () => clearTimeout(timeoutId);
   }, [job, skill, criteria]);
 
-  const handleAddForm = () => {
-    setFormCount((prevCount) => prevCount + 1);
-  };
+  // const handleAddForm = () => {
+  //   setFormCount((prevCount) => prevCount + 1);
+  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -81,17 +82,17 @@ const Createe: React.FC<CreateModalProps> = ({ onClose }) => {
               <br />
               <div className="">
                 <button
-                  className="p-4 w-20 bg-slate-950  text-white rounded-3xl"
+                  className="p-4 w-20 bg-gray-500  text-white rounded-3xl"
                   onClick={handleCloseModal}
                 >
                   Close
                 </button>
-                <button
-                  className="p-4 w-30 bg-slate-950  text-white rounded-3xl ml-5"
+                {/* <button
+                  className="p-4 w-30  bg-gray-500  text-white rounded-3xl ml-5"
                   onClick={handleAddForm}
                 >
                   Add New Form
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
