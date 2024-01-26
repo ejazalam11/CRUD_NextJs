@@ -58,10 +58,10 @@ const EditModel: React.FC<EditModelProps> = ({ data, onUpdate, onClose }) => {
 
   return (
     <>
-      <div className="row text-center fixed top-40 left-40 w-[40%] h-[70%] rounded-2xl ml-[20%] bg-gray-800 bg-opacity-20 backdrop-blur-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+      <div className="row text-center fixed top-20 left-40 w-[40%] h-[70%] rounded-2xl ml-[20%] bg-gray-800 bg-opacity-20 backdrop-blur-2xl shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
         <div className="col-md-4 border-gray-400 border-1 p-5 w-[50%] mt-0 ml-[25%] rounded-2xl ">
           <div className="mb-2 mt-2"></div>
-          <div className="font-bold p-3 mt-10 text-white rounded-lg w-56 text-center text-3xl ml-[1%] mb-8">
+          <div className="font-bold p-3 mt- text-white rounded-lg w-56 text-center text-3xl ml-[1%] mb-8">
             <h1>Update Data</h1>
           </div>
           <form>
@@ -94,7 +94,7 @@ const EditModel: React.FC<EditModelProps> = ({ data, onUpdate, onClose }) => {
             </div>
 
             <br />
-            <button className="bg-gray-500 text-white p-3 rounded-3xl" onClick={onClose}>
+            <button className="bg-gray-500 text-white p-4 rounded-2xl ml-6" onClick={onClose}>
               Close
             </button>
           </form>

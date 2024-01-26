@@ -49,7 +49,7 @@ const Createe: React.FC<CreateModalProps> = ({ onClose }) => {
   return (
     <>
       {isModalOpen && (
-        <div className="fixed top-20 left-40 w-[44%] h-[70%] rounded-2xl ml-[20%] bg-gray-800 bg-opacity-20 backdrop-blur-2xl">
+        <div className="fixed top-20 left-40 w-[44%] h-[70%] rounded-2xl ml-[20%] bg-gray-800 bg-opacity-20 backdrop-blur-2xl  shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
           <div key={0} className="border-gray-400 border-1 p-5 w-[55%] mt-0 ml-[25%] rounded-2xl ">
             <div className="font-bold p-3 text-white rounded-lg w-56 text-center text-3xl ml-[7%]">
               <h1>Create Data</h1>

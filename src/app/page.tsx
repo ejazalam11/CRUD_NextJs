@@ -4,7 +4,11 @@ import axios from 'axios';
 import Button from './Button/page';
 import EditModel from './EditModel/page';
 import Createe from './Createe/page';
-import Aside from './Aside/page';
+// import Aside from './Aside/page';
+import Dashbord from './Dashbord/page';
+import { faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IData {
   id: number;
@@ -69,16 +73,16 @@ const Read: React.FC = () => {
 
   return (
     <div>
-      <Aside/>
+      <Dashbord/>
     
-          <div className="table-container">
-            <table className="w-[80%] ml-[20%] text-white">
+          <div className="table-container ">
+            <table className="w-[80%] ml-[20%] ">
               <thead>
-                <tr>
-                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">ID</th>
-                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">Job Title</th>
-                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">Skill</th>
-                  <th className="p-3 text-2xl bg-blue-100 border text-black px-8 py-4">Criteria</th>
+                <tr className='bg-blue-50'>
+                  <th className="p-3 text-lg   text-black ">ID</th>
+                  <th className="p-3 text-lg   text-black  -">Job Title</th>
+                  <th className="p-3 text-lg   text-black  ">Skill</th>
+                  <th className="p-3 text-lg   text-black  ">Criteria</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,30 +91,32 @@ const Read: React.FC = () => {
                     key={item.id}
                     onClick={() => openEditModal(item.id)}
                     style={{ cursor: 'pointer' }}
-                    className='hover:bg-cyan-100'
+                    className='hover:bg-gray-50'
                   >
-                    <td className="border-1 border text-center text-black">{item.id}</td>
-                    <td className="border-1 border text-center text-black">{item.e_job}</td>
-                    <td className="border-1 border text-center text-black">{item.e_skill}</td>
-                    <td className="border-1 border text-center text-black">{item.e_criteria}</td>
+                    <td className=" text-sm border-b-2 border-gray-100 border-r-0 border-l-0 border-t-0  text-center text-black">{item.id}</td>
+                    <td className="text-sm border-b-2  border-gray-100 border-r-0 border-l-0 border-t-0    text-center text-black">{item.e_job}</td>
+                    <td className="text-sm border-b-2  border-gray-100 border-r-0 border-l-0 border-t-0  text-center text-black">{item.e_skill}</td>
+                    <td className=" text-sm border-b-2  border-gray-100 border-r-0 border-l-0 border-t-0 text-center text-black">{item.e_criteria}</td>
                     <td>
                       <div className="text-center">
-                        <Button
-                          className="p-4 bg-blue-600 text-white rounded-3xl"
+                        {/* <Button
+                          className="p-3 bg-blue-600 text-white rounded-3xl"
                           onClick={(e) => handleDelete(item.id, e)}
                           label="DELETE"
-                        />
+                        /> */}
+                        <button className="p-3  rounded-3xl" onClick={(e) => handleDelete(item.id, e)} > <FontAwesomeIcon icon={faTrash} className='p-2 text-xl text-red-500' /></button>
                       </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <Button
-            className="btn btn-primary bg-blue-500 text-white p-4 ml-[40%] mt-5 m-2 rounded-xl"
+            {/* <Button
+            className="btn btn-primary bg-blue-500 text-white p-4 ml-[50%] mt-5 m-2 rounded-xl"
             onClick={() => setCreateModalOpen(true)}
-            label="Create New Data"
-          />
+            label="Add New"
+          /> */}
+          <button className='bg-blue-500 text-white p-4 ml-[50%] mt-5 m-2 rounded-xl' onClick={() => setCreateModalOpen(true)}  ><FontAwesomeIcon icon={faPlus} className='m-1 mb-0'/>Add New</button>
           </div>
  
           {isCreateModalOpen && <Createe onClose={handleCreateModalClose} />}
