@@ -4,8 +4,8 @@ import axios from 'axios';
 import Button from './Button/page';
 import EditModel from './EditModel/page';
 import Createe from './Createe/page';
-// import Aside from './Aside/page';
-import Dashbord from './Dashbord/page';
+import Aside from './Aside/page';
+// import Dashbord from './Dashbord/page';
 import { faTrash} from '@fortawesome/free-solid-svg-icons'
 import {faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -73,16 +73,16 @@ const Read: React.FC = () => {
 
   return (
     <div>
-      <Dashbord/>
+      <Aside/>
     
           <div className="table-container ">
             <table className="w-[80%] ml-[20%] ">
               <thead>
-                <tr className='bg-blue-50'>
-                  <th className="p-3 text-lg   text-black ">ID</th>
-                  <th className="p-3 text-lg   text-black  -">Job Title</th>
-                  <th className="p-3 text-lg   text-black  ">Skill</th>
-                  <th className="p-3 text-lg   text-black  ">Criteria</th>
+                <tr className='bg-gray-100 '>
+                  <th className="p-3 text-sm   text-black ">ID</th>
+                  <th className="p-3 text-sm   text-black  -">Job Title</th>
+                  <th className="p-3 text-sm   text-black  ">Skill</th>
+                  <th className="p-3 text-sm   text-black  ">Criteria</th>
                 </tr>
               </thead>
               <tbody>
@@ -116,7 +116,7 @@ const Read: React.FC = () => {
             onClick={() => setCreateModalOpen(true)}
             label="Add New"
           /> */}
-          <button className='bg-blue-500 text-white p-4 ml-[50%] mt-5 m-2 rounded-xl' onClick={() => setCreateModalOpen(true)}  ><FontAwesomeIcon icon={faPlus} className='m-1 mb-0'/>Add New</button>
+          <button className='bg-blue-700 text-white p-4 ml-[50%] mt-5 m-2 rounded-xl' onClick={() => setCreateModalOpen(true)}  ><FontAwesomeIcon icon={faPlus} className='m-1 mb-0'/>Add New</button>
           </div>
  
           {isCreateModalOpen && <Createe onClose={handleCreateModalClose} />}
